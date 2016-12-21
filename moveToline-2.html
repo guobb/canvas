@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+<script>
+
+    window.onload = function () {
+        var cns = document.getElementById('canvas');
+
+        cns.width = 800;
+        cns.height = 880;
+
+        var cnt = cns.getContext('2d');
+
+        cnt.lineWidth = 10;
+
+        cnt.beginPath();
+        cnt.moveTo(100, 200);
+        cnt.lineTo(300, 400);
+        cnt.lineTo(100, 600);
+        cnt.strokeStyle = '#f00';
+        cnt.stroke();
+
+        cnt.beginPath();
+        cnt.moveTo(300, 200);
+        cnt.lineTo(500, 400);
+        cnt.lineTo(300, 600);
+        cnt.strokeStyle = '#0f0';
+        cnt.stroke();
+
+        cnt.beginPath();
+        cnt.moveTo(500, 200);
+        cnt.lineTo(700, 400);
+        cnt.lineTo(500, 600);
+        cnt.strokeStyle = '#00f';
+        cnt.stroke();
+
+
+    }
+</script>
+</body>
+</html>

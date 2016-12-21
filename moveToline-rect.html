@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rect</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+<script>
+
+    window.onload = function () {
+        var cns = document.getElementById('canvas');
+
+        cns.width = 800;
+        cns.height = 880;
+
+        var cnt = cns.getContext('2d');
+
+        drawRect(cnt, 100, 100, 400, 400, 10, "#058","#f00");
+    };
+
+    function drawRect(cnt, x, y, width, height, borderWidth, borderColor, fillColor) {
+
+        cnt.beginPath();
+        /*cnt.moveTo(x, y);
+        cnt.lineTo(x + width, y);
+        cnt.lineTo(x + width, y + height);
+        cnt.lineTo(x, y + height);*/
+
+        cnt.rect(x, y, width, height);
+        cnt.closePath();
+
+        cnt.lineWidth = borderWidth;
+        cnt.fillStyle = fillColor;
+        cnt.strokeStyle = borderColor;
+
+        cnt.fill();
+        cnt.stroke();
+    }
+</script>
+</body>
+</html>
