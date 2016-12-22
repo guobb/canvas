@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>text</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+<div id="buttons">
+    <a href="">item1</a>
+    <a href="">item2</a>
+    <a href="">item3</a>
+    <a href="">item4</a>
+    <a href="">item5</a>
+    <a href="">item6</a>
+    <a href="">item7</a>
+    <a href="">item8</a>
+    <a href="">item9</a>
+    <a href="">item10</a>
+    <a href="">item11</a>
+</div>
+<script>
+
+    window.onload = function () {
+
+
+        draw();
+        var buttons = document.getElementById('buttons').getElementsByTagName('a');
+        for(var i = 0; i < buttons.length; i++){
+            buttons[i].onclick = function () {
+                draw(this.text);
+                return false;
+            }
+        }
+    };
+
+    function draw(compositeStyle) {
+
+            var cns = document.getElementById('canvas');
+
+            cns.width = 800;
+            cns.height = 880;
+
+            var cnt = cns.getContext("2d");
+
+            cnt.clearRect( 0, 0, cns.width, cns.height);
+
+            //draw title
+            cnt.font = "bold 40px Arial";
+            cnt.textAlign = "center";
+            cnt.textBaseline = "middle";
+            cnt.fillStyle = "#058";
+            cnt.fillText("globalCompositeOperation =" + compositeStyle, cnt.width/2, 60 );
+
+            //draw rect
+            cnt.fillstyle = "blue";
+            cnt.fillRect(300, 150, 500, 500);
+
+
+            //draw a triangle
+            cnt.globalCompositeOperation = compositeStyle;
+            cnt.fillStyle = "red";
+            cnt.beginPath();
+            cnt.moveTo( 700, 250);
+            cnt.lineTo( 1000, 750);
+            cnt.lineTo( 400, 750);
+            cnt.closePath();
+            cnt.fill();
+        }
+
+
+
+
+
+
+</script>
+</body>
+</html>

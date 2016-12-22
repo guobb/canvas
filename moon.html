@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>liner</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+<script>
+
+    window.onload = function () {
+        var cns = document.getElementById('canvas');
+
+        cns.width = 800;
+        cns.height = 880;
+
+        var cnt = cns.getContext("2d");
+
+        cnt.arc(400, 400, 300, 0.5*Math.PI, 1.5*Math.PI, true);
+        cnt.moveTo( 400, 100);
+        cnt.arcTo(1200, 400, 400, 700, (400-100)*dis(400, 100, 1200, 400)/(1200-400));
+        cnt.stroke();
+        function  dis( x1, y1, x2, y2) {
+            return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mede-html</title>
+    <style>
+        #canvas-wrapper {
+            width: 1200px;
+            height: 800px;
+            position: relative;
+            margin: 50px auto;
+
+        }
+        #canvas {
+            border: 1px solid #aaa;
+
+        }
+        #controller {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: rgba(0, 85, 116, 0.7);
+            padding: 5px 20px 25px 20px;
+            border-radius: 10px 10px;
+        }
+
+        #controller h1 {
+            color: white;
+            font-weight: bold;
+            font-family: Microsoft Yahet;
+        }
+
+        #controller #canvas-btn {
+            display: inline-block;
+            background-color:#8b0;
+            color: white;
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 6px 6px;
+            text-decoration: none;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+
+        #controller #canvas-btn:hover {
+            text-decoration: none;
+            background-color: #7a0;
+
+        }
+        #controller .color-btn {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 6px 6px;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-right: 5px;
+            text-decoration: none;
+        }
+
+        #controller #canvas-btn:hover {
+            text-decoration: none;
+
+        }
+
+        #controller #white-color-btn {
+            background-color: white;
+        }
+
+        #controller #black-color-btn {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<div id="canvas-wrapper">
+    <canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+    
+    </canvas>
+    <div id="controller">
+        <h1>canvas 绘图之旅</h1>
+        <a href="#" id="canvas-btn">停止运动</a>
+        <a href="#" class="color-btn" id="white-color-btn">&nbsp;</a>
+        <a href="#" class="color-btn" id="black-color-btn">&nbsp;</a>
+    </div>
+</div>
+<script>
+
+   var balls = [];
+   var isMoving = true;
+   var themColor = "white";
+
+    window.onload = function () {
+
+        var cns = document.getElementById('canvas');
+
+        cns.width = 1200;
+        cns.height = 800;
+
+        var cnt = cns.getContext('2d');
+
+        for( var i=0; i<100; i++){
+
+
+            var R = Math.floor(Math.random()*255);
+            var G = Math.floor(Math.random()*255);
+            var B = Math.floor(Math.random()*155);
+            var radius = Math.random() *50 + 20;
+
+            aBall = {
+                color: "rgb(" + R + "," + G + "," + B +")",
+                radius: radius,
+                x: Math.random() * (cns.width - 2*radius) + radius,
+                y: Math.random() * (cns.height - 2*radius) + radius,
+                vx: (Math.random()*5 + 5) * Math.pow(-1, Math.floor(Math.random()*100)),
+                vy: (Math.random()*5 + 5) * Math.pow(-1, Math.floor(Math.random()*100))
+            };
+           balls[i] = aBall;
+        }
+
+        setInterval(
+            function () {
+                draw(con);
+                if(isMoving){
+                    update(cns.width, cns.height);
+                }
+            },50
+        );
+
+
+    };
+
+    document.getElementById("canvas-btn").onclick = function (e) {
+        if(isMoving){
+            isMoving = false;
+            this.text = "开始运动";
+        }else{
+            isMoving=true;
+            this.text = "停止运动";
+        }
+        return false;
+    };
+
+    document.getElementById("white-color-btn").onclick = function (e) {
+        themColor = "white";
+        return false;
+    };
+
+   document.getElementById("black-color-btn").onclick = function (e) {
+       themColor = "black";
+       return false;
+   };
+
+    function draw (cnt){
+
+        var cna = cnt.canvas;
+        cnt.clearRect(0, 0, cna.width, cna.height);
+
+        if(themColor=="black"){
+            cnt.fillStyle="black";
+            cnt.fillRect(0, 0, cna.width, cna.height);
+        }
+
+        for(var i=0; i<balls.length; i++){
+            cnt.fillStyle = balls[i].color;
+            cnt.beginPath();
+            cnt.arc(balls[i].x, balls[i].y, balls[i].radius, 0, Math.PI * 2);
+            cnt.closePath();
+            cnt.fill();
+        }
+
+    }
+
+    function update () {
+        var x = e.clientX - cns.getBoundingClientRect().left;
+        var y = e.clientY - cns.getBoundingClientRect().top;
+
+        for(var i =0; i < balls.length; i ++){
+            cnt.beginPath();
+            cnt.arc( balls[i].x, balls[i].y, balls[i].r, 0, Math.PI*0.5);
+
+            if(cnt.isPointInPath(x, y)){
+                cnt.fillStyle = 'red';
+                cnt.fill();
+            }
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

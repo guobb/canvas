@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="margin: 20px auto; width: 1700px;">
+    <canvas id="canvasa" width="800" height="560" style="display:block; margin:0 auto; border:1px solid #aaa; float:left">
+
+    </canvas>
+    <canvas id="canvasb" width="800" height="560" style="display:block; margin:0 auto; border:1px solid #aaa; float:left"></canvas>
+</div>
+<div style="clear: both"></div>
+
+<div style="text-align: center; margin-top: 50px; font-size: 20px;">
+    <a href="javascript: filter()">filter</a>
+</div>
+
+<canvas id="offCanvas" style="display:none;"></canvas>
+<script>
+    var canvasa = document.getElementById('canvasa');
+    var contenta = canvasa.getContext('2d');
+
+    var canvasb = document.getElementById('canvasb');
+    var contentb = canvasb.getContext('2d');
+
+
+    var image = new Image();
+
+    window.onload = function () {
+
+        image.src = "img2.jpg";
+        image.onload = function () {
+
+            contenta.drawImage(image, 0, 0, canvasa.width, canvasa.height)
+        }
+
+
+    };
+
+    function filter() {
+        //获取canvasa的全部信息
+        var imageData = contenta.getImageData(0, 0, canvasa.width, canvasa.height);
+
+        var pixeData = imageData.data;
+
+        for(var i = 0; i < canvasb.width * canvasb.height; i++){
+            pixeData[4*i+0] = 0;
+            /*pixeData[4*i+1] = 0;
+            pixeData[4*i+2] = 0;*/
+
+        }
+        contentb.putImageData( imageData, 0, 0, 0, 0, canvasb.width, canvasb.height);
+    };
+
+
+</script>
+</body>
+</html>

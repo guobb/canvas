@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>clip</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+
+<script>
+
+    window.onload = function () {
+
+
+        var cns = document.getElementById('canvas');
+
+        cns.width = 800;
+        cns.height = 800;
+
+        var cnt = cns.getContext("2d");
+
+        cnt.beginPath();
+        cnt.arc(400, 400, 150, 0, Math.PI*2);
+        cnt.clip();
+
+        cnt.font = "bold 150px Arial";
+        cnt.textAlign = "center";
+        cnt.textBaseline = "middle";
+        cnt.fillStyle = "#058";
+        cnt.fillText("CANVAS", cns.width/2, cns.height/2);
+
+
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>

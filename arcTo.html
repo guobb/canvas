@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>liner</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+<script>
+
+    window.onload = function () {
+        var cns = document.getElementById('canvas');
+
+        cns.width = 800;
+        cns.height = 880;
+
+        var cnt = cns.getContext("2d");
+
+        //arcTo
+        cnt.beginPath();
+        cnt.moveTo(150, 150);
+        cnt.arcTo(650, 150, 650, 650, 300);
+
+        cnt.lineWidth = 6;
+        cnt.strokeStyle = 'red';
+        cnt.stroke();
+
+        //baseline
+
+        cnt.beginPath();
+        cnt.moveTo(150, 150);
+        cnt.lineTo(650, 150);
+        cnt.lineTo(650, 650);
+
+        cnt.lineWidth = 2;
+        cnt.strokeStyle = 'gray';
+        cnt.stroke();
+
+
+    }
+</script>
+</body>
+</html>

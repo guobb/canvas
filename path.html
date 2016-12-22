@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>path</title>
+</head>
+<body>
+<canvas id="canvas" style="border:1px solid #aaa; display:block; margin:50px auto;">
+
+</canvas>
+
+<script>
+
+    var cns = document.getElementById('canvas');
+    var cnt = cns.getContext("2d");
+    var balls = [];
+
+    window.onload = function () {
+
+        cns.width = 800;
+        cns.height = 800;
+
+        for( var i=0; i<10; i++){
+            var aBall = {
+                x: Math.random() * cns.width,
+                y: Math.random() * cns.height,
+                r: Math.random() * 50 + 20
+            };
+            balls[i] = aBall;
+        }
+
+        draw();
+        cns.addEventListener("mouseup", detect);
+
+    };
+
+    function draw (){
+
+        for(var i=0; i<balls.length; i++){
+            cnt.beginPath();
+            cnt.arc(balls[i].x, balls[i].y, balls[i].r, 0, Math.PI * 2);
+
+            cnt.fillStyle = "#058";
+            cnt.fill();
+        }
+
+    }
+
+    function detect (e) {
+        var x = e.clientX - cns.getBoundingClientRect().left;
+        var y = e.clientY - cns.getBoundingClientRect().top;
+
+        for(var i =0; i < balls.length; i ++){
+            cnt.beginPath();
+            cnt.arc( balls[i].x, balls[i].y, balls[i].r, 0, Math.PI*0.5);
+
+            if(cnt.isPointInPath(x, y)){
+                cnt.fillStyle = 'red';
+                cnt.fill();
+            }
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
